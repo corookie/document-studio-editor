@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文档编辑与素材管理</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <aside class="sidebar-card">
+      <p class="eyebrow">Workspace</p>
+      <h1>文档与目录</h1>
+      <p class="sidebar-copy">支持本地新建文件、目录树展示和文档切换。当前版本数据保存在浏览器本地。</p>
+      <div class="sidebar-actions">
+        <button type="button" id="newFolderBtn" class="secondary-btn">新建目录</button>
+        <button type="button" id="newFileBtn" class="primary-btn">新建文件</button>
+      </div>
+      <div class="tree-panel">
+        <div class="tree-header">
+          <span>文件目录</span>
+        </div>
+        <div id="fileTree" class="file-tree"></div>
+      </div>
+    </aside>
+
+    <main class="editor-layout">
+      <section class="toolbar-card">
+        <div class="toolbar-row">
+          <label class="field-group">
+            <span>字体</span>
+            <select id="fontFamilySelect">
+              <option value="Microsoft YaHei">微软雅黑</option>
+              <option value="SimSun">宋体</option>
+              <option value="KaiTi">楷体</option>
+              <option value="SimHei">黑体</option>
+              <option value="Arial">Arial</option>
+              <option value="Georgia">Georgia</option>
+            </select>
+          </label>
+          <label class="field-group small">
+            <span>字号</span>
+            <select id="fontSizeSelect">
+              <option value="12px">12</option>
+              <option value="14px">14</option>
+              <option value="16px" selected>16</option>
+              <option value="18px">18</option>
+              <option value="24px">24</option>
+              <option value="32px">32</option>
+            </select>
+          </label>
+          <label class="field-group">
+            <span>标题</span>
+            <select id="blockTypeSelect">
+              <option value="p">正文</option>
+              <option value="h1">标题 1</option>
+              <option value="h2">标题 2</option>
+              <option value="h3">标题 3</option>
+            </select>
+          </label>
+          <div class="inline-actions">
+            <button type="button" class="format-btn" data-command="bold">加粗</button>
+            <button type="button" class="format-btn" data-command="italic">斜体</button>
+            <button type="button" class="format-btn" data-command="underline">下划线</button>
+            <button type="button" class="format-btn" data-command="insertUnorderedList">项目符号</button>
+          </div>
+        </div>
+
+        <div class="toolbar-footer">
+          <div class="toolbar-main-actions">
+            <button type="button" id="addAssetSectionBtn" class="primary-btn">添加素材区域</button>
+            <button type="button" id="saveDocBtn" class="secondary-btn">保存文档</button>
+          </div>
+          <span class="toolbar-hint">素材支持删除与另存，添加素材区域后会自动补一个新的可编辑段落。</span>
+        </div>
+      </section>
+
+      <section class="document-card">
+        <div class="doc-status-bar">
+          <div class="doc-title-wrap">
+            <span class="doc-title-label">当前文档</span>
+            <strong id="currentDocumentName">未命名文档</strong>
+          </div>
+          <span>文档内容保存在浏览器本地，可随时切换文件。</span>
+        </div>
+        <div id="editor" class="editor-area" contenteditable="true"></div>
+      </section>
+    </main>
+  </div>
+
+  <template id="assetSectionTemplate">
+    <section class="asset-section" contenteditable="false">
+      <div class="asset-section-header">
+        <div>
+          <h2>素材区域</h2>
+          <p>可上传图片或视频素材，每行显示 5 个</p>
+        </div>
+        <div class="asset-actions">
+          <label class="secondary-btn file-trigger">
+            添加图片
+            <input type="file" accept="image/*" multiple data-action="add-image">
+          </label>
+          <label class="secondary-btn file-trigger">
+            添加视频
+            <input type="file" accept="video/*" multiple data-action="add-video">
+          </label>
+        </div>
+      </div>
+      <div class="asset-grid"></div>
+    </section>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
